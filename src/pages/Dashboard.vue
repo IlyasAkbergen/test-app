@@ -22,7 +22,7 @@
                         :id="card.id"
                         :draggable="dragable"
                         :key="`card-${card.id}`">
-                    <p>{{ card.name }} <span class="delete-card" @click="removeCard(card.id)">X</span></p>
+                    <p>{{ card.name }} <i class="fa fa-pencil" @click="editCard(card)" /></p>
                     <span>{{ card.description }}</span>
                 </Card>
             </Column>
@@ -59,8 +59,12 @@
                 this.setNewCardAsFocused();
                 this.$router.push('/card-form');
             },
+            editCard(card) {
+                this.setFocusedCard(card);
+                this.$router.push('/card-form');
+            },
             ...mapActions('columns', ['initColumns', 'initCards', 'addCard', 'removeCard']),
-            ...mapMutations('columns', ['setNewCardAsFocused']),
+            ...mapMutations('columns', ['setNewCardAsFocused', 'setFocusedCard']),
             ...mapMutations(['setDragable'])
         }
     }
