@@ -1,6 +1,6 @@
-enum Styles = {
+const Styles = {
     display_block: "block",
-    display_nonde: "none"
+    display_none: "none"
 }
 
 export default Styles

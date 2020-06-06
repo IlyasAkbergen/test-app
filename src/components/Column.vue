@@ -1,20 +1,21 @@
 <template>
     <div
-        :id="id"
-        class="board"
+        :id="column.id"
+        class="column"
         @dragover.prevent
-        @drop.prevent="drop"
+        @drop.prevent="(e) => drop(e)"
     >
         <slot />
-        <AddButton text="Добавить" @click="addBtnClicked" />
+        <AddButton @click="addBtnClicked">Добавить</AddButton>
     </div>
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     import Styles from "../enums/Styles";
     export default {
         name: "Column",
-        props: ['id'],
+        props: ['column'],
         enums: {
           Styles,
         },
@@ -22,11 +23,14 @@
           AddButton: () => import('./AddButton'),
         },
         methods: {
-            drop: e => {
+            ...mapActions('columns', ['dropCard']),
+            drop(e) {
                 const card_id = e.dataTransfer.getData('card_id');
-                const card = document.getElementById(card_id);
-                card.style.display = Styles.display_block;
-                e.target.appendChild(card);
+                this.dropCard({
+                    card_id: card_id,
+                    column_id: this.column.id
+                })
+
             },
             addBtnClicked () {
                 console.log("add btn clicked");
