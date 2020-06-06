@@ -27,6 +27,9 @@
                 </Card>
             </Column>
         </main>
+        <div class="flexbox">
+            <Trash />
+        </div>
     </div>
 </template>
 
@@ -37,7 +40,8 @@
         components: {
             Column: () => import('../components/Column'),
             Card: () => import('../components/Card'),
-            AddButton: () => import('../components/AddButton')
+            AddButton: () => import('../components/AddButton'),
+            Trash: () => import('../components/Trash'),
         },
         created() {
             this.initColumns();

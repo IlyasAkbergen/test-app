@@ -12,9 +12,6 @@ export default {
         }
         commit('saveState');
     },
-    deleteCard() {
-
-    },
     initColumns({ commit, state }) {
         const columns = localStorage.getItem('columns')
             ? JSON.parse(localStorage.getItem('columns'))
