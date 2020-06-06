@@ -34,5 +34,8 @@ export default {
     updateCard(state, card) {
         const index = state.cards.indexOf((c) => c.id === card.id);
         state.cards[index] = card;
+    },
+    deleteCard(state, card_id) {
+        state.cards = state.cards.filter(c => c.id !== card_id);
     }
 }

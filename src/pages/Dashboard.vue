@@ -22,7 +22,7 @@
                         :id="card.id"
                         :draggable="dragable"
                         :key="`card-${card.id}`">
-                    <p>{{ card.name }}</p>
+                    <p>{{ card.name }} <span class="delete-card" @click="removeCard(card.id)">X</span></p>
                     <span>{{ card.description }}</span>
                 </Card>
             </Column>
@@ -55,7 +55,7 @@
                 this.setNewCardAsFocused();
                 this.$router.push('/card-form');
             },
-            ...mapActions('columns', ['initColumns', 'initCards', 'addCard']),
+            ...mapActions('columns', ['initColumns', 'initCards', 'addCard', 'removeCard']),
             ...mapMutations('columns', ['setNewCardAsFocused']),
             ...mapMutations(['setDragable'])
         }
@@ -63,5 +63,10 @@
 </script>
 
 <style scoped>
-
+    .delete-card {
+        float: right;
+        color: darkred;
+        border: 1px solid darkred;
+        padding: 0px 2px;
+    }
 </style>

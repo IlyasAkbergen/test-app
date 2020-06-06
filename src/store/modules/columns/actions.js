@@ -26,5 +26,9 @@ export default {
             ? JSON.parse(localStorage.getItem('cards'))
             : state.default_cards;
         commit('setCards', cards)
+    },
+    removeCard({ commit }, card_id) {
+        commit('deleteCard', card_id);
+        commit('saveState');
     }
 }
