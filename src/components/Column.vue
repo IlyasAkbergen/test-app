@@ -33,7 +33,6 @@
 
             },
             addBtnClicked () {
-                console.log("add btn clicked");
             }
         }
     }

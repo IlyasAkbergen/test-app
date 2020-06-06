@@ -3,15 +3,17 @@ export default {
         commit('setColumnToCard', data)
         commit('saveState')
     },
-    addCard() { //({ commit }, card) {
-        // commit('setLoading', true);
-        // return axios.get('/room-types/')
-        //     .then((res) => {
-        //         commit('setAllRoomTypes', res.data.result);
-        //         commit('setLoading', false);
-        //         return res
-        //     })
-        //     .catch(() => commit('setLoading', false))
+    submitFocusedCardForm({ commit, getters }, card) {
+        if (card.id === 0) {
+            card.id = getters.getMaxCardId + 1;
+            commit('saveCard', card);
+        } else {
+            commit('updateCard', card);
+        }
+        commit('saveState');
+    },
+    deleteCard() {
+
     },
     initColumns({ commit, state }) {
         const columns = localStorage.getItem('columns')
@@ -20,7 +22,6 @@ export default {
         commit('setColumns', columns)
     },
     initCards({ commit, state }) {
-        console.log(localStorage.getItem('cards'));
         const cards = localStorage.getItem('cards')
             ? JSON.parse(localStorage.getItem('cards'))
             : state.default_cards;

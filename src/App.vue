@@ -3,56 +3,18 @@
     <div v-show="loading" class="loading">
         <span class="sr-only">Загрузка...</span>
     </div>
-    <div v-show="!loading">
-      <div class="flexbox">
-        <div class="card">
-          <AddButton @click="addBtnClicked">Добавить</AddButton>
-        </div>
-      </div>
-      <main class="flexbox">
-        <Column v-for="col in columns"
-                :id="col.id"
-                :column="col"
-                :key="`column-${col.id}`">
-          <h2 class="column-title">{{ col.name }}</h2>
-          <Card
-              v-for="card in cardsOfColumn(col.id)"
-              :id="card.id" draggable="true"
-              :key="`card-${card.id}`">
-            <p>{{ card.name }}</p>
-            <span>{{ card.description }}</span>
-          </Card>
-        </Column>
-      </main>
-    </div>
+    <transition name="slide-fade" mode="out-in" v-show="!loading">
+      <router-view />
+    </transition>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex';
 export default {
   name: 'App',
-  components: {
-    Column: () => import('./components/Column'),
-    Card: () => import('./components/Card'),
-    AddButton: () => import('./components/AddButton')
-  },
-  created() {
-    this.initColumns();
-    this.initCards();
-  },
   computed: {
     ...mapState(['loading']),
-    ...mapState('columns', ['columns', 'cards']),
-  },
-  methods: {
-    cardsOfColumn (column_id) {
-      return this.cards.filter((c) => c.column_id === column_id)
-    },
-    addBtnClicked() {
-
-    },
-    ...mapActions('columns', ['initColumns', 'initCards', 'addCard']),
   }
 }
 </script>
@@ -105,5 +67,11 @@ export default {
   .column-title {
     margin-bottom: 10px;
     border-bottom: 1px solid black;
+  }
+
+  .btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
   }
 </style>

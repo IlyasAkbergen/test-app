@@ -1,6 +1,7 @@
 export default {
     columns: [],
     cards: [],
+    focusedCard: {},
     default_columns: [
         {
             id: 1,
