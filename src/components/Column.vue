@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapActions, mapMutations } from 'vuex';
     import Styles from "../enums/Styles";
     export default {
         name: "Column",
@@ -24,6 +24,7 @@
         },
         methods: {
             ...mapActions('columns', ['dropCard']),
+            ...mapMutations('columns', ['setNewCardAsFocused']),
             drop(e) {
                 const card_id = e.dataTransfer.getData('card_id');
                 this.dropCard({
@@ -33,6 +34,8 @@
 
             },
             addBtnClicked () {
+                this.setNewCardAsFocused(this.column.id);
+                this.$router.push('/card-form');
             }
         }
     }
