@@ -51,6 +51,7 @@ export default {
   }
 
   .flexbox .column .card {
+    height: 100px;
     padding: 15px 25px;
     background-color: azure;
     cursor: pointer;
